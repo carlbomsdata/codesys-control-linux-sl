@@ -12,11 +12,19 @@ This is a brief guide how to work with Codesys Control Linux SL Runtime in a Lin
 
 5. To verify install from Codesys IDE click on System Info 
 
-6. To verify install on Linux machine. SSH to Linux machine and cd in to /var/opt. Here shall exist a folder called codesys with all necessary files.
+6. To verify install on Linux machine. SSH to Linux machine and cd in to '/var/opt'. Here shall exist a folder called codesys with all necessary files.
 
-7. Make Codesys runtime run as a service. Verify that codesyscontrol.service is NOT listed here systemctl list-units --type=service
+7. Make Codesys runtime run as a service. Verify that codesyscontrol.service is NOT listed here
+``` bash
+systemctl list-units --type=service
+```
 
-8. Create service sudo nano /etc/systemd/system/codesyscontrol.service
+9. Create service
+``` bash
+sudo nano /etc/systemd/system/codesyscontrol.service
+```
+
+``` bash
 [Unit]
 Description=CODESYS SoftPLC
 After=network.target
@@ -28,16 +36,32 @@ User=root
 
 [Install]
 WantedBy=multi-user.target
+```
 
-9. sudo systemctl daemon-reload
+9. Reload services configuration
+``` bash
+sudo systemctl daemon-reload
+```
 
-10. sudo systemctl start codesyscontrol
+11. Start service
+``` bash
+sudo systemctl start codesyscontrol
+```
 
-11. sudo systemctl enable codesyscontrol
+13. Enable service
+``` bash
+sudo systemctl enable codesyscontrol
+```
 
-12. Verify that codesyscontrol.service IS listed here systemctl list-units --type=service
+15. Verify that codesyscontrol.service IS listed here
+``` bash
+systemctl list-units --type=service
+```
 
-13. Check status sudo systemctl status codesyscontrol
+17. Check status
+``` bash
+sudo systemctl status codesyscontrol
+```
 
 Now codesys runtime will restart automatically when demo period of 2 hour is reached.
 
