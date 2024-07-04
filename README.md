@@ -24,6 +24,27 @@ systemctl list-units --type=service
 sudo nano /etc/systemd/system/codesyscontrol.service
 ```
 
+```bash
+[Unit]
+Description=Codesys Control Service
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/etc/init.d/codesyscontrol start
+ExecStop=/etc/init.d/codesyscontrol stop
+ExecReload=/etc/init.d/codesyscontrol restart
+PIDFile=/var/run/codesyscontrol.pid
+User=root
+Group=root
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
+OR
+
 ``` bash
 [Unit]
 Description=CODESYS SoftPLC
